@@ -21,6 +21,20 @@ function generate(){
     }
     let finalBlock = emptyPlace[Math.floor(Math.random()*numberOfEmptyPlaces)];
     finalBlock.textContent = num;
+    let cells = Array.from(document.querySelector(".grid").children);
+    cells.forEach(i =>{
+        if(i.textContent == ""){
+            i.style.backgroundColor = "#736d67";
+        }
+        if(i.textContent == 2){
+            i.style.backgroundColor = "#9d9287";
+            i.style.fontSize = "60px"
+        }
+        if(i.textContent == 4){
+            i.style.backgroundColor = "#b7a089";
+            i.style.fontSize = "60px"
+        }
+    })
 }
 generate();
 // ----------------------------------------------------------------------------------------
@@ -168,21 +182,72 @@ function control(e){
     result.textContent = "Game Over!";
     result.style.color = "red";
     };
+    if(checkForWin()){
+    // console.log("over");
+    document.body.removeEventListener("keyup",control);
+    let result = document.querySelector("#result");
+    result.textContent = "YOU WIN";
+    result.style.color = "green";
+    };
+    if (score > 9999){
+        document.querySelector("#score").style.fontSize = "20px";
+    }
+    let cells = Array.from(document.querySelector(".grid").children);
+    cells.forEach(i =>{
+        if(i.textContent == ""){
+            i.style.backgroundColor = "#736d67";
+            i.style.fontSize = "60px"
+        }
+        if(i.textContent == 2){
+            i.style.backgroundColor = "#9d9287";
+            i.style.fontSize = "60px"
+        }
+        if(i.textContent == 4){
+            i.style.backgroundColor = "#b7a089";
+            i.style.fontSize = "60px"
+        }
+        if(i.textContent == 8){
+            i.style.backgroundColor = "#b58a5f";
+            i.style.fontSize = "60px"
+        }
+        if(i.textContent == 16){
+            i.style.backgroundColor = "#c38140";
+            i.style.fontSize = "60px"
+        }
+        if(i.textContent == 32){
+            i.style.backgroundColor = "#e5811d";
+            i.style.fontSize = "60px"
+        }
+        if(i.textContent == 64){
+            i.style.backgroundColor = "#e5b31d";
+            i.style.fontSize = "60px"
+        }
+        if(i.textContent == 128){
+            i.style.backgroundColor = "#dff20b";
+            i.style.fontSize = "60px"
+        }
+        if(i.textContent == 256){
+            i.style.backgroundColor = "#41f20b";
+            i.style.fontSize = "60px"
+        }
+        if(i.textContent == 512){
+            i.style.backgroundColor = "#0bf2c4";
+            i.style.fontSize = "60px"
+        }
+        if(i.textContent == 1024){
+            i.style.backgroundColor = "#0bb4f2";
+            i.style.fontSize = "40px"
+            i.style.alignItems = "centre"
+        }
+        if(i.textContent == 2048){
+            i.style.backgroundColor = "#0b16f2";
+            i.style.fontSize = "40px"
+        }
+    })
 }
 document.querySelector("body").addEventListener("keyup",control);
 // ----------------------------------------------------------------------------------------
 
-let restart  = document.querySelector("#restart-button");
-restart.addEventListener('click',()=>{
-    score = 0;
-    document.querySelector("#score").textContent = `${score}`;
-    for (let i=0;i<16;i++){
-        document.querySelector(`#id_${i}`).textContent = "";
-    };
-    generate();
-    generate();
-    
-});
 function isGameOver(){
     // console.log("over");
     for(let i = 0;i<16;i++){
@@ -206,3 +271,24 @@ function isGameOver(){
     }
     return true;
 }
+
+function checkForWin(){
+    for(let i = 0;i<16;i++){
+        if(document.querySelector(`#id_${i}`).textContent == 2048){
+            return true;
+        }
+    }
+}
+let restart  = document.querySelector("#restart-button");
+restart.addEventListener('click',()=>{
+    score = 0;
+    document.querySelector("#score").textContent = `${score}`;
+    for (let i=0;i<16;i++){
+        document.querySelector(`#id_${i}`).textContent = "";
+    };
+    generate();
+    generate();
+    document.querySelector("#result").innerHTML = "Join the numbers and get to the <b>2048</b> tile!";
+    document.querySelector("#result").textContent.style.color = "black"
+    
+});
