@@ -3,7 +3,7 @@ function createBoard(){
     for (let i = 0;i<16;i++){
         let div = document.createElement("div");
         div.setAttribute('id',`id_${i}`);
-        div.textContent = "0";
+        div.textContent = "";
         gridDiv.appendChild(div);
     }
 }
@@ -14,7 +14,7 @@ function generate(){
     
     let allBoxes = [...document.querySelectorAll(".grid>div")];
     // document.innerText = `${allBoxes}`;
-    let emptyPlace = allBoxes.filter((a)=>a.textContent == "0");
+    let emptyPlace = allBoxes.filter((a)=>a.textContent == "");
     let numberOfEmptyPlaces = emptyPlace.length;
     if (numberOfEmptyPlaces == 0){
         return;
@@ -26,16 +26,16 @@ generate();
 // ----------------------------------------------------------------------------------------
 let score = 0;
 function shiftArrayLeft(values){
-    let finalArray = values.filter((i) => i != "0");
+    let finalArray = values.filter((i) => i != "");
     for (let i = finalArray.length;i < 4;i++){
-        finalArray.push("0");
+        finalArray.push("");
     }
     return finalArray;
 }
 function shiftArrayRight(values){
-    let finalArray = values.filter((i) => i != "0");
+    let finalArray = values.filter((i) => i != "");
     for (let i = finalArray.length;i < 4;i++){
-        finalArray.unshift("0");
+        finalArray.unshift("");
     }
     return finalArray;
 }
@@ -177,7 +177,7 @@ restart.addEventListener('click',()=>{
     score = 0;
     document.querySelector("#score").textContent = `${score}`;
     for (let i=0;i<16;i++){
-        document.querySelector(`#id_${i}`).textContent = "0";
+        document.querySelector(`#id_${i}`).textContent = "";
     };
     generate();
     generate();
